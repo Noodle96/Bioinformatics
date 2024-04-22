@@ -9,6 +9,8 @@ void solve(){
      cout << "Error al crear el archivo: " << "lab" << endl;
      }
     cin>>s;
+    // convert all uppercase
+    transform(s.begin(), s.end(), s.begin(), ::toupper);
     for(int e = 0 ; e < (int)s.size(); e++){
         dic[s[e]]++;
     }
@@ -91,6 +93,7 @@ void solve(){
 
     }else{
         //podria ser ADN o proteina
+        // cout << "alfabeto restante: " << alfabeto_restante << endl;
         if(alfabeto_restante){
             cout << "Proteina" << endl;
             salida << "Proteina" << endl;
@@ -106,6 +109,7 @@ void solve(){
     int len_n = s.size();
     transcripcion.resize(len_n);
     if(tipo == "ADN"){
+        // cout << tipo << endl;
         // De adn a ARN
         for(int e = 0 ; e < (int)s.size() ;e++){
             if(s[e] == 'G') transcripcion[e] = 'C';
