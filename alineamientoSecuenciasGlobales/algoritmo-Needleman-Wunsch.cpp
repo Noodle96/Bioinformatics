@@ -105,7 +105,7 @@ void dfs(int x, int y){
 
 
 void solve(){
-	salida.open("laboratorio2_complementario.txt");
+	salida.open("laboratorioNW.txt");
 	cin>>secuenciaOne>>secuenciaTwo;
 	/*
 		*Aseguramos que la secuencia mas larga este en las columnas
