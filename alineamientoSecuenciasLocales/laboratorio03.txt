@@ -1,0 +1,22 @@
+(i) El valor mayor: 2
+
+(ii) Subsecuencias en comun:
+Subsecuencia 1 aa
+Subsecuencia 2 aa
+
+(iv) Matrix de scores: 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 1 1 0 1 1 1 1 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 1 1 0 1 1 1 1 
+0 1 2 0 1 2 0 1 2 2 2 
+0 0 0 1 0 0 1 0 0 1 1 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 1 1 0 1 1 1 1 
+0 1 2 0 1 2 0 1 2 2 2 
+0 0 0 1 0 0 1 0 0 1 1 
+
+(v) Existe en alguna otra subsecuencia
+SI
+

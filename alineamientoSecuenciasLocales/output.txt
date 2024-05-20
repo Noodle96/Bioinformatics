@@ -1,0 +1,30 @@
+(i) El valor mayor: 2
+
+(ii) Subsecuencias en comun:
+Subsecuencia 1 aa
+Subsecuencia 2 aa
+
+(iii) posición en donde se encuentra (ambas cadenas)
+En la secuencia 1:accaaccaac
+La cadena [aa] esta contenida dentro de [accaaccaac].
+En las siguientes posiciones: 3 7 
+En la secuencia 2:aagaagaaaa
+La cadena [aa] esta contenida dentro de [aagaagaaaa].
+En las siguientes posiciones: 0 3 6 7 8 
+
+(iv) Matrix de scores: 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 1 1 0 1 1 1 1 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 1 1 0 1 1 1 1 
+0 1 2 0 1 2 0 1 2 2 2 
+0 0 0 1 0 0 1 0 0 1 1 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 1 0 1 1 0 1 1 1 1 
+0 1 2 0 1 2 0 1 2 2 2 
+0 0 0 1 0 0 1 0 0 1 1 
+
+(v) Existe en alguna otra subsecuencia
+SI
+
