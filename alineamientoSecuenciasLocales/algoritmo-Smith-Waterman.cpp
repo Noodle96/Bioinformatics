@@ -141,7 +141,8 @@ void similitud(string str1, string str2){
 
 void dfs(int x, int y){
 	if(currentState == dp[x][y]){
-		if(x == 0 || y == 0){
+		//if(x == 0 || y == 0){
+		if(currentState == 0){
 			// cout << "in x == 0 || y == 0" << endl;
 			reverse(all(subcadena));
 			subcadenasGeneradas.pb(subcadena);
@@ -176,7 +177,7 @@ void dfs(int x, int y){
 
 
 void solve(){
-	salida.open("laboratorio03.txt");
+	salida.open("laboratorio_03_05.txt");
 	cin>>secuenciaOne>>secuenciaTwo;
 	/*
 		*Aseguramos que la secuencia mas larga este en las columnas
@@ -314,7 +315,7 @@ void solve(){
 		cout << "En la secuencia 1:" << secuenciaOne << endl;
 		similitud(subcadenasGeneradas[0], secuenciaOne);
 		// cout << "print posiciones foundPatternIndex 01" << endl;
-		cout << "En las siguientes posiciones: ";
+		cout << "en las siguientes posiciones: ";
 		for(auto e : foundPatternIndex){
 			cout << e << " ";
 		}cout << endl;
@@ -323,13 +324,37 @@ void solve(){
 		cout << "En la secuencia 2:" << secuenciaTwo << endl;
 		similitud(subcadenasGeneradas[0], secuenciaTwo);
 		// cout << "print posiciones foundPatternIndex 02" << endl;
-		cout << "En las siguientes posiciones: ";
+		cout << "en las siguientes posiciones: ";
 		for(auto e : foundPatternIndex){
 			cout << e << " ";
 		}cout << endl;
 		cout << endl;
 	}else{
 		cout << "(iii) ninguna subcadena" << endl;
+	}
+	salida << "(iii) posición en donde se encuentra (ambas cadenas)" << endl;
+	//verificamos que exista al menos una subcadena generada.
+	if(subcadenasGeneradas.size()>=1){
+		salida << "En la secuencia 1:" << secuenciaOne << endl;
+		foundPatternIndex.clear();
+		similitud(subcadenasGeneradas[0], secuenciaOne);
+		// cout << "print posiciones foundPatternIndex 01" << endl;
+		salida << "en las siguientes posiciones: ";
+		for(auto e : foundPatternIndex){
+			salida << e << " ";
+		}salida << endl;
+
+		foundPatternIndex.clear();
+		salida << "En la secuencia 2:" << secuenciaTwo << endl;
+		similitud(subcadenasGeneradas[0], secuenciaTwo);
+		// cout << "print posiciones foundPatternIndex 02" << endl;
+		salida << "en las siguientes posiciones: ";
+		for(auto e : foundPatternIndex){
+			salida << e << " ";
+		}salida << endl;
+		salida << endl;
+	}else{
+		salida << "(iii) ninguna subcadena" << endl;
 	}
 
 

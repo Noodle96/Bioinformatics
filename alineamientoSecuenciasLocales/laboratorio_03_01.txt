@@ -1,0 +1,27 @@
+(i) El valor mayor: 3
+
+(ii) Subsecuencias en comun:
+Subsecuencia 1 aag
+
+(iii) posición en donde se encuentra (ambas cadenas)
+En la secuencia 1:attaaaggtt
+en las siguientes posiciones: 4 
+En la secuencia 2:atggaagcaa
+en las siguientes posiciones: 4 
+
+(iv) Matrix de scores: 
+0 0 0 0 0 0 0 0 0 0 0 
+0 1 0 0 0 1 1 0 0 1 1 
+0 0 2 0 0 0 0 0 0 0 0 
+0 0 1 1 0 0 0 0 0 0 0 
+0 1 0 0 0 1 1 0 0 1 1 
+0 1 0 0 0 1 2 0 0 1 2 
+0 1 0 0 0 1 2 1 0 1 2 
+0 0 0 1 1 0 0 3 1 0 0 
+0 0 0 1 2 0 0 1 2 0 0 
+0 0 1 0 0 1 0 0 0 1 0 
+0 0 1 0 0 0 0 0 0 0 0 
+
+(v) Existe en alguna otra subsecuencia
+NO
+

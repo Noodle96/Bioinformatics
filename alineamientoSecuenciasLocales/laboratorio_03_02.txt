@@ -1,0 +1,38 @@
+(i) El valor mayor: 4
+
+(ii) Subsecuencias en comun:
+Subsecuencia 1 aagc
+Subsecuencia 2 gaag
+
+(iii) posición en donde se encuentra (ambas cadenas)
+En la secuencia 1:tcaagcgttagagaagtcat
+en las siguientes posiciones: 2 
+En la secuencia 2:atggaagcaa
+en las siguientes posiciones: 4 
+
+(iv) Matrix de scores: 
+0 0 0 0 0 0 0 0 0 0 0 
+0 0 1 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 1 0 0 
+0 1 0 0 0 1 1 0 0 2 1 
+0 1 0 0 0 1 2 0 0 1 3 
+0 0 0 1 1 0 0 3 1 0 1 
+0 0 0 0 0 0 0 1 4 2 0 
+0 0 0 1 1 0 0 1 2 3 1 
+0 0 1 0 0 0 0 0 0 1 2 
+0 0 1 0 0 0 0 0 0 0 0 
+0 1 0 0 0 1 1 0 0 1 1 
+0 0 0 1 1 0 0 2 0 0 0 
+0 1 0 0 0 2 1 0 1 1 1 
+0 0 0 1 1 0 1 2 0 0 0 
+0 1 0 0 0 2 1 0 1 1 1 
+0 1 0 0 0 1 3 1 0 2 2 
+0 0 0 1 1 0 1 4 2 0 1 
+0 0 1 0 0 0 0 2 3 1 0 
+0 0 0 0 0 0 0 0 3 2 0 
+0 1 0 0 0 1 1 0 1 4 3 
+0 0 2 0 0 0 0 0 0 2 3 
+
+(v) Existe en alguna otra subsecuencia
+SI
+

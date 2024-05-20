@@ -1,0 +1,5 @@
+10 primeros sars - 10 primers influenza
+20 primeras bacteria - 10 primeras influenza
+30 primeros influenza - 20 ultimos sars
+60 primero sars - 60 primeros influenza
+120 influenza - 240 bacteria
