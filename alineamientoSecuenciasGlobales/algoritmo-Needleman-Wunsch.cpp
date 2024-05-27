@@ -21,7 +21,7 @@ int gcd(int a,int b){
 	else return gcd(b,a%b);
 }
 
-clock_t startTime;
+clock_t startTime,endTime;
 double getCurrentTime() {
 	return (double)(clock() - startTime) / CLOCKS_PER_SEC;
 }
@@ -48,19 +48,19 @@ void dfs(int x, int y){
 		//printing cadena
 		cantidadCadenas++;
 		// cout << "Printing Cadena" << endl;
-		for(int e = ans.size()-1; e >= 0 ; e--){
-			cout << ans[e].first << " ";
-		}cout << endl;
-		for(int e = ans.size()-1; e >= 0 ; e--){
-			cout << ans[e].second << " ";
-		}cout << endl;
+		// for(int e = ans.size()-1; e >= 0 ; e--){
+		// 	cout << ans[e].first << " ";
+		// }cout << endl;
+		// for(int e = ans.size()-1; e >= 0 ; e--){
+		// 	cout << ans[e].second << " ";
+		// }cout << endl;
 
-		for(int e = ans.size()-1; e >= 0 ; e--){
-			salida << ans[e].first << " ";
-		}salida << endl;
-		for(int e = ans.size()-1; e >= 0 ; e--){
-			salida << ans[e].second << " ";
-		}salida << endl << endl;
+		// for(int e = ans.size()-1; e >= 0 ; e--){
+		// 	salida << ans[e].first << " ";
+		// }salida << endl;
+		// for(int e = ans.size()-1; e >= 0 ; e--){
+		// 	salida << ans[e].second << " ";
+		// }salida << endl << endl;
 		return;
 	}
 	if(dp_direcciones[x][y][0]){
@@ -105,7 +105,7 @@ void dfs(int x, int y){
 
 
 void solve(){
-	salida.open("laboratorioNW.txt");
+	salida.open("laboratorioNW_04.txt");
 	cin>>secuenciaOne>>secuenciaTwo;
 	/*
 		*Aseguramos que la secuencia mas larga este en las columnas
@@ -159,6 +159,8 @@ void solve(){
 	/*
 		*Aplicamos el algoritmo de Needleman-Wunsch
 	*/
+	startTime = clock();
+	salida << "Tiempo Inicio: " << (double)(startTime)  / CLOCKS_PER_SEC << " segundos" << endl;
 	for(int e = 1 ; e < sizeOne+1; e++){
 		for(int j = 1 ;j < sizeTwo+1 ;j++){
 			diag = dp[e-1][j-1]+(secuenciaOne[e-1]==secuenciaTwo[j-1]?1:-1);
@@ -170,6 +172,9 @@ void solve(){
 			if(dp[e][j] == leftt) dp_direcciones[e][j][2] = 1;
 		}
 	}
+	endTime = clock();
+	salida << "Tiempo Final: " << (double)(endTime)  / CLOCKS_PER_SEC << " segundos" << endl;
+	salida << "Tiempo de ejecucion: " << getCurrentTime() << endl;
 	// print dp_direcciones
 	// cout << "dp_direcciones" << endl;
 	// for(int e = 0 ; e < sizeOne +1 ; e++){
@@ -202,14 +207,14 @@ void solve(){
 	*/
 
 	// dfs dp_direcciones
-	int i = sizeOne;
-	int j = sizeTwo;
-	cout << "Alineamientos Generados" << endl;
-	salida << "Alineamientos Generados" << endl;
-	dfs(sizeOne,sizeTwo);
+	// int i = sizeOne;
+	// int j = sizeTwo;
+	// cout << "Alineamientos Generados" << endl;
+	// salida << "Alineamientos Generados" << endl;
+	// dfs(sizeOne,sizeTwo);
 
-	cout << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
-	salida << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
+	// cout << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
+	// salida << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
 }
 int main(){
 	ios_base::sync_with_stdio(false);

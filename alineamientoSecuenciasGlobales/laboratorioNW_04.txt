@@ -1,3 +1,6 @@
+Tiempo Inicio: 0.006983 segundos
+Tiempo Final: 0.014678 segundos
+Tiempo de ejecucion: 0.007706
 score Optimo: -138
 
 Matrix

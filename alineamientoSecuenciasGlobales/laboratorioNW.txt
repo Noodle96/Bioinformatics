@@ -1,20 +1,28 @@
-score Optimo: 0
+Tiempo Inicio: 0.005655 segundos
+Tiempo Final: 0.005791 segundos
+Tiempo de ejecucion: 0.000156
+score Optimo: 2
 
 Matrix
-0 -2 -4 -6 -8 -10 -12 -14 -16 -18 -20 
--2 1 -1 -3 -5 -7 -9 -11 -13 -15 -17 
--4 -1 2 0 -2 -4 -6 -8 -10 -12 -14 
--6 -3 0 1 -1 -3 -5 -7 -9 -11 -13 
--8 -5 -2 -1 0 0 -2 -4 -6 -8 -10 
--10 -7 -4 -3 -2 1 1 -1 -3 -5 -7 
--12 -9 -6 -5 -4 -1 2 0 -2 -2 -4 
--14 -11 -8 -5 -4 -3 0 3 1 -1 -3 
--16 -13 -10 -7 -4 -5 -2 1 2 0 -2 
--18 -15 -12 -9 -6 -5 -4 -1 0 1 -1 
--20 -17 -14 -11 -8 -7 -6 -3 -2 -1 0 
+0 -2 -4 -6 -8 -10 -12 -14 -16 
+-2 1 -1 -3 -5 -7 -9 -11 -13 
+-4 -1 2 0 -2 -4 -6 -8 -10 
+-6 -3 0 1 -1 -3 -3 -5 -7 
+-8 -5 -2 1 0 -2 -4 -4 -6 
+-10 -7 -4 -1 0 1 -1 -3 -3 
+-12 -9 -6 -3 -2 -1 2 0 -2 
+-14 -11 -8 -5 -4 -3 0 1 -1 
+-16 -13 -10 -7 -4 -5 -2 1 0 
+-18 -15 -12 -9 -6 -3 -4 -1 2 
 
 Alineamientos Generados
-a t t a a a g g t t 
-a t g g a a g c a a 
+A C T G A T T C A 
+A C - G C A T C A 
 
-Cantidad de alineaminentos producidos: 1
+A C T G A T T C A 
+A C G C A - T C A 
+
+A C T G A T T C A 
+A C G C A T - C A 
+
+Cantidad de alineaminentos producidos: 3
