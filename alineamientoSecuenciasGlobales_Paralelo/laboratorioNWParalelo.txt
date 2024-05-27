@@ -1,0 +1,28 @@
+Tiempo Inicio: 0.005558 segundos
+Tiempo Final: 0.016714 segundos
+Tiempo de ejecucion: 0.011223s
+score Optimo: 2
+
+Matrix
+0 -2 -4 -6 -8 -10 -12 -14 -16 
+-2 1 -1 -3 -5 -7 -9 -11 -13 
+-4 -1 2 0 -2 -4 -6 -8 -10 
+-6 -3 0 1 -1 -3 -3 -5 -7 
+-8 -5 -2 1 0 -2 -4 -4 -6 
+-10 -7 -4 -1 0 1 -1 -3 -3 
+-12 -9 -6 -3 -2 -1 2 0 -2 
+-14 -11 -8 -5 -4 -3 0 1 -1 
+-16 -13 -10 -7 -4 -5 -2 1 0 
+-18 -15 -12 -9 -6 -3 -4 -1 2 
+
+Alineamientos Generados
+A C T G A T T C A 
+A C - G C A T C A 
+
+A C T G A T T C A 
+A C G C A - T C A 
+
+A C T G A T T C A 
+A C G C A T - C A 
+
+Cantidad de alineaminentos producidos: 3
