@@ -47,13 +47,13 @@ void dfs(int x, int y){
 		// cout << "in x == 0 && y == 0" << endl;
 		//printing cadena
 		cantidadCadenas++;
-		// cout << "Printing Cadena" << endl;
-		// for(int e = ans.size()-1; e >= 0 ; e--){
-		// 	cout << ans[e].first << " ";
-		// }cout << endl;
-		// for(int e = ans.size()-1; e >= 0 ; e--){
-		// 	cout << ans[e].second << " ";
-		// }cout << endl;
+		cout << "Printing Cadena" << endl;
+		for(int e = ans.size()-1; e >= 0 ; e--){
+			cout << ans[e].first << " ";
+		}cout << endl;
+		for(int e = ans.size()-1; e >= 0 ; e--){
+			cout << ans[e].second << " ";
+		}cout << endl;
 
 		// for(int e = ans.size()-1; e >= 0 ; e--){
 		// 	salida << ans[e].first << " ";
@@ -207,14 +207,14 @@ void solve(){
 	*/
 
 	// dfs dp_direcciones
-	// int i = sizeOne;
-	// int j = sizeTwo;
-	// cout << "Alineamientos Generados" << endl;
-	// salida << "Alineamientos Generados" << endl;
-	// dfs(sizeOne,sizeTwo);
+	int i = sizeOne;
+	int j = sizeTwo;
+	cout << "Alineamientos Generados" << endl;
+	salida << "Alineamientos Generados" << endl;
+	dfs(sizeOne,sizeTwo);
 
-	// cout << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
-	// salida << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
+	cout << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
+	salida << "Cantidad de alineaminentos producidos: " << cantidadCadenas << endl;
 }
 int main(){
 	ios_base::sync_with_stdio(false);
