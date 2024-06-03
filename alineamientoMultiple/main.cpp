@@ -165,6 +165,8 @@ class NeedlemanWunsch{
 };
 
 void solve(){
+    fstream salida;
+    salida.open("alineamiento_multiple_00.txt", ios::out);
     while(getline(cin,line)){
         // cout << "line is: " << line << endl;
         sequences.emplace_back(line);
@@ -205,13 +207,17 @@ void solve(){
         }
     }
     cout << "(i) print matriz scores" << endl;
+    salida << "(i) print matriz scores" << endl;
     for(int e = 0; e < sequences.size(); e++){
         int sumatoria = 0;
         for(int j = 0 ; j < sequences.size(); j++){
             cout << matriz_scores[e][j] << " ";
+            salida << matriz_scores[e][j] << " ";
             sumatoria += matriz_scores[e][j];
         }cout << " = " << sumatoria << endl;
+        salida << " = " << sumatoria << endl;
     }cout << endl;
+    salida << endl;
 
     /*
         Encontrar el S_c el centro de la matriz
@@ -231,6 +237,8 @@ void solve(){
         }
     }
     cout << "El centro es: S" << row_max+1 << ": " << sequences[row_max] << endl;
+    salida << "El centro es: S" << row_max+1 << ": " << sequences[row_max] << endl;
+
     // cout << "maximo: " << maximo << endl;
     // cout << "row_max: " << row_max << endl;
 
@@ -238,7 +246,10 @@ void solve(){
         Encontrar alineamiento de cada secuencia con la estrella
     */
     cout << endl;
+    salida << endl;
     cout << "(ii) alineamiento de cada secuencia con la estrella"  << endl;
+    salida << "(ii) alineamiento de cada secuencia con la estrella"  << endl;
+
     int maximo_len_row = INT_MIN;
     maximo_len_row = max(maximo_len_row,(int)sequences[row_max].size());
     for(int e = 0 ; e < sequences.size(); e++){
@@ -248,18 +259,27 @@ void solve(){
                 cout << "No hubo concidencias" << endl;
                 cout << "S" << row_max+1 <<"| "<< sequences[row_max] << endl;
                 cout << "S" << e+1 <<"| "<< "vacio" << endl;
+                salida << "No hubo concidencias" << endl;
+                salida << "S" << row_max+1 <<"| "<< sequences[row_max] << endl;
+                salida << "S" << e+1 <<"| "<< "vacio" << endl;
                 return;
             }else{
                 auto alineamiento = map_first_alignment[row_max][e];
                 maximo_len_row = max(maximo_len_row,(int)alineamiento.size());
                 cout << "S" << row_max+1 <<"| ";
+                salida << "S" << row_max+1 <<"| ";
                 for(int e = alineamiento.size()-1; e >= 0 ; e--){
                     cout << alineamiento[e].first << " ";
+                    salida << alineamiento[e].first << " ";
                 }cout << endl;
+                salida << endl;
                 cout << "S" << e+1 <<"| ";
+                salida << "S" << e+1 <<"| ";
                 for(int e = alineamiento.size()-1; e >= 0 ; e--){
                     cout << alineamiento[e].second << " ";
+                    salida << alineamiento[e].second << " ";
                 }cout << endl;
+                salida << endl;
 
                 // cout << "S" << row_max+1 <<"| "<< "any" << endl;
                 // cout << "S" << e+1 <<"| "<< "any2" << endl;
@@ -274,6 +294,7 @@ void solve(){
         }
     }
     cout << endl << "(iii) alineamiento múltiple" << endl;
+    salida << endl << "(iii) alineamiento múltiple" << endl;
     vector<vector<char>> multipleAligment_representation;
     multipleAligment_representation.resize(sequences.size(),vector<char>(maximo_len_row,'-'));
     // cout << "print multipleAligment_representation" << endl;
@@ -282,7 +303,7 @@ void solve(){
     for(int e = 0 ; e < sequences[row_max].size(); e++){
         multipleAligment_representation[row_max][e] = sequences[row_max][e];
     }
-    
+
     for(int e = 0 ; e  < sequences.size(); e++ ){
         if(e != row_max){
             auto alineamiento = map_first_alignment[row_max][e];
@@ -296,9 +317,11 @@ void solve(){
     // print multiple alignment
     for(int e = 0 ; e < sequences.size(); e++){
         cout << "S" << e+1 << "| ";
+        salida << "S" << e+1 << "| ";
         for(int j = 0 ; j < multipleAligment_representation[e].size(); j++){
             cout << multipleAligment_representation[e][j] << " ";
-        }cout << endl;
+            salida << multipleAligment_representation[e][j] << " ";
+        }cout << endl; salida << endl;
     }
 }
 void test(){
