@@ -1,0 +1,17 @@
+(i) print matriz scores
+0 -4 -4  = -8
+-4 0 -6  = -10
+-4 -6 0  = -10
+
+El centro es: S1: TCGT
+
+(ii) alineamiento de cada secuencia con la estrella
+S1| T C G T 
+S2| - C - C 
+S1| T C G T 
+S3| A A A A 
+
+(iii) alineamiento múltiple
+S1| T C G T 
+S2| - C - C 
+S3| A A A A 
