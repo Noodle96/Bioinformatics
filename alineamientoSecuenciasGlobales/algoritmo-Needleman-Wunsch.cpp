@@ -202,6 +202,15 @@ void solve(){
 		}salida << endl;
 	}salida << endl;
 
+	cout << "print direcciones " << endl;
+	for(int e = 0 ; e < sizeOne +1 ; e++){
+		for(int j = 0 ; j < sizeTwo+1; j++){
+			for(int w = 0 ; w < 3; w++){
+				cout << dp_direcciones[e][j][w] << " ";
+			}cout << endl;
+		}cout << endl;
+	}
+
 	/*
 		! dfs para hacer el flood fill al grafo implicito
 	*/
