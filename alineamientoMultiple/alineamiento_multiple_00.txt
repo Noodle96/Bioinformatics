@@ -1,17 +1,27 @@
 (i) print matriz scores
-0 -4 -4  = -8
--4 0 -6  = -10
--4 -6 0  = -10
+0 -5 -1 -4 -4  = -14
+-5 0 -4 2 -5  = -12
+-1 -4 0 -4 0  = -9
+-4 2 -4 0 -5  = -11
+-4 -5 0 -5 0  = -14
 
-El centro es: S1: TCGT
+El centro es: S3: tatgtgataa
 
 (ii) alineamiento de cada secuencia con la estrella
-S1| T C G T 
-S2| - C - C 
-S1| T C G T 
-S3| A A A A 
+No hubo concidencias
+S3| tatgtgataa
+S1| vacio
+No hubo concidencias
+S3| tatgtgataa
+S2| vacio
+S3| t a t g t g a t a a 
+S4| a a a a a t t c a a 
+S3| t a t g t g a t a a 
+S5| c t t g g t a t c a 
 
 (iii) alineamiento múltiple
-S1| T C G T 
-S2| - C - C 
-S3| A A A A 
+S1| - - - - - - - - - - 
+S2| - - - - - - - - - - 
+S3| t a t g t g a t a a 
+S4| a a a a a t t c a a 
+S5| c t t g g t a t c a 

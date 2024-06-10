@@ -29,8 +29,7 @@ string line;
 int score_i;
 vector<string> sequences;
 vector<vector<int>> matriz_scores;
-map<int, map<int, vector<pair<char,char>>>> map_first_alignment;
-
+map<int, map<int, pair<bool,pair<string,string> > >> map_first_alignment;
 
 class NeedlemanWunsch{
     private:
@@ -39,10 +38,11 @@ class NeedlemanWunsch{
         int cantidadCadenas;
         vector<pair<char,char>> ans;
         string str1,str2;
-        vector<pair<char, char>> particular_pair;
+        pair<bool, pair<string,string>> particular_pair;
     public:
         NeedlemanWunsch(){
             cantidadCadenas = 0;
+            particular_pair = {false,{"",""}};
         };
         ~NeedlemanWunsch(){};
         void clear(){
@@ -52,9 +52,13 @@ class NeedlemanWunsch{
             str1.clear();
             str2.clear();
             ans.clear();
-            particular_pair.clear();
+            particular_pair = {false,{"",""}};
         }
         int bestScore(string secuenciaOne, string secuenciaTwo){
+            clear();
+            // cout << "bestScore" << endl;
+            // cout << "secuenciaOne: " << secuenciaOne << endl;
+            // cout << "secuenciaTwo: " << secuenciaTwo << endl;
             this->str1 = secuenciaOne; this->str2 = secuenciaTwo;
 
             //if(secuenciaOne.size()<secuenciaTwo.size()) swap(secuenciaOne,secuenciaTwo);
@@ -86,17 +90,18 @@ class NeedlemanWunsch{
                     if(dp[e][j] == leftt) dp_direcciones[e][j][2] = 1;
                 }
 	        }
-            // cout << "in bestScore print dp" << endl;
-            // for(int e = 0; e < sizeOne+1; e++){
-            //     for(int j = 0 ; j < sizeTwo+1; j++){
-            //         cout << dp[e][j] << " ";
-            //     }cout << endl;
-            // } cout << endl;
-            // cout << "end print dp" << endl;
+            cout << "in bestScore print dp" << endl;
+            cout << "begin dp" << endl;
+            for(int e = 0; e < sizeOne+1; e++){
+                for(int j = 0 ; j < sizeTwo+1; j++){
+                    cout << dp[e][j] << " ";
+                }cout << endl;
+            } cout << endl;
+            cout << "end print dp" << endl;
 
-            // cout << "secuencias: " << endl;
-            // cout << "01: " << str1 << endl;
-            // cout << "02: " << str2 << endl;
+            cout << "secuencias: " << endl;
+            cout << "01: " << str1 << endl;
+            cout << "02: " << str2 << endl;
             return dp[sizeOne][sizeTwo];
         }
 
@@ -107,22 +112,39 @@ class NeedlemanWunsch{
                 //printing cadena
                 cantidadCadenas++;
                 // cout << "Printing Cadena" << endl;
-                // for(int e = ans.size()-1; e >= 0 ; e--){
-                //     cout << ans[e].first << " ";
-                // }cout << endl;
-                // for(int e = ans.size()-1; e >= 0 ; e--){
-                //     cout << ans[e].second << " ";
-                // }cout << endl;
 
-                // for(int e = ans.size()-1; e >= 0 ; e--){
-                // 	salida << ans[e].first << " ";
-                // }salida << endl;
-                // for(int e = ans.size()-1; e >= 0 ; e--){
-                // 	salida << ans[e].second << " ";
-                // }salida << endl << endl;
-                if(particular_pair.size() == 0){
-                    particular_pair = ans;
+                string a,b;
+                for(int e = ans.size()-1; e >= 0 ; e--){
+                    // cout << ans[e].first << " ";
+                    a += ans[e].first;
                 }
+
+                for(int e = ans.size()-1; e >= 0 ; e--){
+                    // cout << ans[e].second << " ";
+                    b+= ans[e].second;
+                }
+                cout << a << endl;
+                cout << b << endl;
+
+                if(particular_pair.first == false){
+                    particular_pair = {true,{a,b}};
+                    cout << "a: " << a << endl;
+                    cout << "b: " << b << endl;
+                }
+                // for(int e = ans.size()-1; e >= 0 ; e--){
+                // 	cout  << ans[e].first << " ";
+                // }cout  << endl;
+                // for(int e = ans.size()-1; e >= 0 ; e--){
+                // 	cout  << ans[e].second << " ";
+                // }cout  << endl << endl;
+                
+
+
+
+                // if(particular_pair.size() == 0){
+                //     particular_pair = ans;
+                // }
+                // cases.pb({a,b});
                 return;
             }
             if(dp_direcciones[x][y][0]){
@@ -155,18 +177,23 @@ class NeedlemanWunsch{
                 }
             }
         }
-
         int getCantidadCadenas(){
             return cantidadCadenas;
         }
-        vector<pair<char,char>> getParticularPair(){
+        auto getParticular_pair(){
             return particular_pair;
+        }
+        void alinearDosSecuencias(string str1, string str2){
+            bestScore(str1,str2);
+            dfs(str1.size(),str2.size());
+            auto ff = getParticular_pair();
+            cout << "ff: " << ff.first << " " << ff.second.first << " " << ff.second.second << endl;
         }
 };
 
 void solve(){
     fstream salida;
-    salida.open("alineamiento_multiple_00.txt", ios::out);
+    salida.open("alineamiento_multiple_02.txt", ios::out);
     while(getline(cin,line)){
         // cout << "line is: " << line << endl;
         sequences.emplace_back(line);
@@ -200,7 +227,10 @@ void solve(){
                 score_i = NW.bestScore(sequences[e],sequences[j]);
                 // para generar minimo un alineamiento en la recursion
                 NW.dfs(sequences[e].size(),sequences[j].size());
-                map_first_alignment[e][j] = NW.getParticularPair();
+                // map_first_alignment[e][j] = NW.getParticularPair();
+                map_first_alignment[e][j] = NW.getParticular_pair();
+                map_first_alignment[j][e] = NW.getParticular_pair();
+                // cout << map_first_alignment[e][j].first << " " << map_first_alignment[e][j].second.first << " " << map_first_alignment[e][j].second.second << endl;
                 matriz_scores[e][j] = score_i;
                 matriz_scores[j][e] = score_i;
             }
@@ -253,51 +283,50 @@ void solve(){
     int maximo_len_row = INT_MIN;
     maximo_len_row = max(maximo_len_row,(int)sequences[row_max].size());
     for(int e = 0 ; e < sequences.size(); e++){
+        // cout << "e: " << e << endl;
         if(e != row_max){
-            // cout << (map_first_alignment[row_max][e].size() == 0) <<  endl;
-            if(map_first_alignment[row_max][e].empty()){
-                cout << "No hubo concidencias" << endl;
-                cout << "S" << row_max+1 <<"| "<< sequences[row_max] << endl;
-                cout << "S" << e+1 <<"| "<< "vacio" << endl;
-                salida << "No hubo concidencias" << endl;
-                salida << "S" << row_max+1 <<"| "<< sequences[row_max] << endl;
-                salida << "S" << e+1 <<"| "<< "vacio" << endl;
-                return;
-            }else{
-                auto alineamiento = map_first_alignment[row_max][e];
-                maximo_len_row = max(maximo_len_row,(int)alineamiento.size());
-                cout << "S" << row_max+1 <<"| ";
-                salida << "S" << row_max+1 <<"| ";
-                for(int e = alineamiento.size()-1; e >= 0 ; e--){
-                    cout << alineamiento[e].first << " ";
-                    salida << alineamiento[e].first << " ";
-                }cout << endl;
-                salida << endl;
-                cout << "S" << e+1 <<"| ";
-                salida << "S" << e+1 <<"| ";
-                for(int e = alineamiento.size()-1; e >= 0 ; e--){
-                    cout << alineamiento[e].second << " ";
-                    salida << alineamiento[e].second << " ";
-                }cout << endl;
-                salida << endl;
-
-                // cout << "S" << row_max+1 <<"| "<< "any" << endl;
-                // cout << "S" << e+1 <<"| "<< "any2" << endl;
-                // for(int e = alineamiento.size()-1; e >= 0 ; e--){
-                //     cout << ans[e].first << " ";
-                // }cout << endl;
-                // for(int e = ans.size()-1; e >= 0 ; e--){
-                //     cout << ans[e].second << " ";
-                // }cout << endl;
+            auto alineamiento = map_first_alignment[e][row_max];
+            if(alineamiento.first == false
+                || alineamiento.second.first.size() == 0
+                || alineamiento.second.second.size() == 0){
+                    cout << "assert !!!" << endl;
+                    cout << "______________" << endl;
+                    cout << alineamiento.first << " " << alineamiento.second.first << " " << alineamiento.second.second << endl;
             }
+
+            // cout << "alineamoento:" << endl;
+            // cout  << alineamiento.first << " " << alineamiento.second.first << " " << alineamiento.second.second << endl;
+            maximo_len_row = max(maximo_len_row,(int)alineamiento.second.first.size());
+            cout << "S" << row_max+1 <<"| ";
+            salida << "S" << row_max+1 <<"| ";
+            cout << alineamiento.second.second << endl;
+            salida << alineamiento.second.second << endl;
+            
+            cout << "S" << e+1 <<"| ";
+            salida << "S" << e+1 <<"| ";
+            cout << alineamiento.second.first << endl << endl;
+            salida << alineamiento.second.first << endl << endl;
+
+            // cout << "S" << row_max+1 <<"| "<< "any" << endl;
+            // cout << "S" << e+1 <<"| "<< "any2" << endl;
+            // for(int e = alineamiento.size()-1; e >= 0 ; e--){
+            //     cout << ans[e].first << " ";
+            // }cout << endl;
+            // for(int e = ans.size()-1; e >= 0 ; e--){
+            //     cout << ans[e].second << " ";
+            // }cout << endl;
+            
             
         }
     }
+    // salida << "stop" << endl;
+    
+    // return;
     cout << endl << "(iii) alineamiento múltiple" << endl;
     salida << endl << "(iii) alineamiento múltiple" << endl;
     vector<vector<char>> multipleAligment_representation;
     multipleAligment_representation.resize(sequences.size(),vector<char>(maximo_len_row,'-'));
-    // cout << "print multipleAligment_representation" << endl;
+    // // cout << "print multipleAligment_representation" << endl;
 
     // para la cadena estrella
     for(int e = 0 ; e < sequences[row_max].size(); e++){
@@ -306,21 +335,24 @@ void solve(){
 
     for(int e = 0 ; e  < sequences.size(); e++ ){
         if(e != row_max){
-            auto alineamiento = map_first_alignment[row_max][e];
-            int index = 0;
-            for(int j = alineamiento.size()-1; j >= 0 ; j--){
-                multipleAligment_representation[e][index] = alineamiento[j].second;
-                index++;
+            auto alineamiento = map_first_alignment[e][row_max];
+            // cout << "alineamiento test: " << alineamiento.first << " " << alineamiento.second << endl;
+            // for(int j = alineamiento.size()-1; j >= 0 ; j--){
+            //     multipleAligment_representation[e][index] = alineamiento[j].second;
+            //     index++;
+            // }
+            for(int j = 0 ; j < alineamiento.second.first.size(); j++){
+                multipleAligment_representation[e][j] = alineamiento.second.first[j];
             }
         }
     }
-    // print multiple alignment
+    // // print multiple alignment
     for(int e = 0 ; e < sequences.size(); e++){
         cout << "S" << e+1 << "| ";
         salida << "S" << e+1 << "| ";
         for(int j = 0 ; j < multipleAligment_representation[e].size(); j++){
-            cout << multipleAligment_representation[e][j] << " ";
-            salida << multipleAligment_representation[e][j] << " ";
+            cout << multipleAligment_representation[e][j];
+            salida << multipleAligment_representation[e][j];
         }cout << endl; salida << endl;
     }
 }
@@ -328,9 +360,10 @@ void test(){
     string t1,t2;
     cin>>t1>>t2;
     NeedlemanWunsch NW;
-    cout << NW.bestScore(t1,t2) << endl;
-    NW.dfs(t1.size(),t2.size()); // para generar minimo un alineamiento en la recursion
-    cout << "cantidad cadenas: " << NW.getCantidadCadenas() << endl;
+    NW.alinearDosSecuencias(t1,t2);
+    // cout << NW.bestScore(t1,t2) << endl;
+    // NW.dfs(t1.size(),t2.size()); // para generar minimo un alineamiento en la recursion
+    // cout << "cantidad cadenas: " << NW.getCantidadCadenas() << endl;
 }
 
 int main(){
@@ -340,7 +373,7 @@ int main(){
         freopen("input.txt","r",stdin);
         freopen("output.txt","w",stdout);
     #endif
-    solve();
-    // test();
+    // solve();
+    test();
     return 0;
 }

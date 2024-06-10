@@ -1,0 +1,34 @@
+(i) print matriz scores
+0 -8 -3 -8 -6 -7  = -32
+-8 0 -13 -4 -10 -10  = -45
+-3 -13 0 -8 -5 -4  = -33
+-8 -4 -8 0 -9 -7  = -36
+-6 -10 -5 -9 0 -2  = -32
+-7 -10 -4 -7 -2 0  = -30
+
+El centro es: S6: ggctgcatgcttagtgcact
+
+(ii) alineamiento de cada secuencia con la estrella
+No hubo concidencias
+S6| ggctgcatgcttagtgcact
+S1| vacio
+No hubo concidencias
+S6| ggctgcatgcttagtgcact
+S2| vacio
+No hubo concidencias
+S6| ggctgcatgcttagtgcact
+S3| vacio
+No hubo concidencias
+S6| ggctgcatgcttagtgcact
+S4| vacio
+No hubo concidencias
+S6| ggctgcatgcttagtgcact
+S5| vacio
+
+(iii) alineamiento múltiple
+S1| - - - - - - - - - - - - - - - - - - - - 
+S2| - - - - - - - - - - - - - - - - - - - - 
+S3| - - - - - - - - - - - - - - - - - - - - 
+S4| - - - - - - - - - - - - - - - - - - - - 
+S5| - - - - - - - - - - - - - - - - - - - - 
+S6| g g c t g c a t g c t t a g t g c a c t 

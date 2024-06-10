@@ -1,0 +1,64 @@
+(i) print matriz scores
+0 -5 -1 -4 -4 -3 -4 -6 1 -1 -4 -5  = -36
+-5 0 -4 2 -5 -5 -3 -4 0 -4 -3 -2  = -33
+-1 -4 0 -4 0 -1 -5 -5 -5 -1 -1 -2  = -29
+-4 2 -4 0 -5 -1 2 -6 -3 -6 -2 -4  = -31
+-4 -5 0 -5 0 -3 0 -2 -1 -1 0 -6  = -27
+-3 -5 -1 -1 -3 0 -4 -7 -6 -1 -2 -2  = -35
+-4 -3 -5 2 0 -4 0 -3 -4 -7 -4 -8  = -40
+-6 -4 -5 -6 -2 -7 -3 0 -3 -4 -4 -6  = -50
+1 0 -5 -3 -1 -6 -4 -3 0 -4 -3 -4  = -32
+-1 -4 -1 -6 -1 -1 -7 -4 -4 0 -5 -6  = -40
+-4 -3 -1 -2 0 -2 -4 -4 -3 -5 0 -3  = -31
+-5 -2 -2 -4 -6 -2 -8 -6 -4 -6 -3 0  = -48
+
+El centro es: S5: cttggtatca
+
+(ii) alineamiento de cada secuencia con la estrella
+S5| cttggtatca
+S1| tcaagcgtta
+
+S5| cttggtatca-
+S2| g-agaagtcat
+
+S5| cttggtatca
+S3| tatgtgataa
+
+S5| cttggtatc-a
+S4| aaaaat-tcaa
+
+S5| 
+S6| 
+
+S5| cgaaatacca
+S7| cttggtatca
+
+S5| gtggcttacc
+S8| cttggtatca
+
+S5| 
+S9| 
+
+S5| 
+S10| 
+
+S5| aacggtaata
+S11| cttggtatca
+
+S5| aaggagctgg
+S12| cttggtatca
+
+
+(iii) alineamiento múltiple
+S1| tcaagcgtta-
+S2| g-agaagtcat
+S3| tatgtgataa-
+S4| aaaaat-tcaa
+S5| cttggtatca-
+S6| -----------
+S7| cttggtatca-
+S8| cttggtatca-
+S9| -----------
+S10| -----------
+S11| cttggtatca-
+S12| cttggtatca-
