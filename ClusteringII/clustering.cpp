@@ -29,6 +29,35 @@ double val;
 int n,n_;
 int value = 1;
 
+vector<pair<double, string>> answerLab;
+
+double media(vector<double> &X){
+    double sum=0;
+    for(auto x:X){
+        sum+=x;
+    }
+    return sum/X.size();
+}
+
+double coeficienteCorrelacion(vector<double> &X, vector<double> &Y){
+    // cout << X.size() << " " <<Y.size() << endl;
+    double mediaX = media(X);
+    double mediaY = media(Y);
+    double numerador = 0.0;
+    double firstDen = 0.0, secondDen = 0.0;
+    for(int e = 0 ; e < (int)X.size(); e++){
+        numerador += ( (X[e] - mediaX) * (Y[e] - mediaY) );
+        firstDen += ( (X[e] - mediaX) * (X[e] - mediaX) );
+        secondDen += ( (Y[e] - mediaY) * (Y[e] - mediaY) );
+    }
+    if(firstDen*secondDen == 0){
+        cout << "denominador 0\n";
+        return 0;
+    }
+    double r = numerador / sqrt(firstDen*secondDen);
+    return r;
+}
+
 
 vector<string> getEtiqueta(vector<pair<string, vector<pair<string,double>>>> & M){
     vector<string> etiqueta;
@@ -36,6 +65,25 @@ vector<string> getEtiqueta(vector<pair<string, vector<pair<string,double>>>> & M
         etiqueta.push_back(it->first);
     }
     return etiqueta;
+}
+
+vector<pair<string, vector<pair<string,double>>>> hashOrdered(matrix_double & M){
+    vector<pair<string, vector<pair<string,double>>>> print_m;
+    for(auto it = M.begin() ; it != M.end(); it++){
+        vector<pair<string,double>> temp;
+        for(auto ot = it->second.begin() ; ot != it->second.end()  ; ot++){
+            // cout << ot->second << " ";
+            temp.push_back({ot->first,ot->second});
+        }
+        // cout << endl;
+        print_m.push_back({it->first,temp});
+    }
+    // cout << endl;
+    sort(all(print_m));
+    for(auto it = print_m.begin() ; it != print_m.end(); it++){
+        sort(all(it->second));
+    }
+    return print_m;
 }
 
 void printMatrix(matrix_double & M){
@@ -157,12 +205,26 @@ void estrategia_distancia_minima(){
     int nivelK = 1;
 
     distancia_minima = matrix;
+    // conversion de la matrix de similaridad (F) a un vector X
+    auto distancia_minina_ordenada = hashOrdered(distancia_minima);
+    vector<double> X;
+    int cantidad = 0;
+    for(auto it = distancia_minina_ordenada.begin(); it != distancia_minina_ordenada.end(); it++){
+        auto ot = it->second.begin();
+        for(int c= 0; ot != it->second.end(),c < cantidad; ot++,c++){
+            X.push_back(ot->second);
+        }
+        cantidad++;
+    }
     
     cout << "Clusteres Iniciales: ";
     for(int e = 0 ; e < distancia_minima.size(); e++){
         cout << e << " ";
     }cout << endl << endl;
     printMatrix(distancia_minima);
+    unordered_map<string, unordered_map<string , double>> matrixCofenica;
+    matrixCofenica = distancia_minima;
+
     while(distancia_minima.size() >= 2){
         // cout << "distancia_minima size: " << distancia_minima.size() << endl;
         auto x_y_min = getMinAndClusters(distancia_minima);
@@ -206,17 +268,69 @@ void estrategia_distancia_minima(){
             cout << e << " ";
         }cout << endl;
         printMatrix(distancia_minima);
+
+        // construccion de la matrix cofenica
+        for(auto it = x.begin(); it != x.end(); it++){
+            for(auto ot = y.begin(); ot != y.end(); ot++){
+                matrixCofenica[to_string(*it-'0')][to_string(*ot-'0')] = min;
+                matrixCofenica[to_string(*ot-'0')][to_string(*it-'0')] = min;
+            }
+        }
     }
+    cout << "print matrix cofenica - Estrategia distancia minima" << endl;
+    printMatrix(matrixCofenica);
+
+    // conversion de la matriz a un vector Y
+    vector<double> Y;
+    int cantidad2 = 0;
+    auto matrixCofenicaOrdenada = hashOrdered(matrixCofenica);
+    for(auto it = matrixCofenicaOrdenada.begin() ; it != matrixCofenicaOrdenada.end(); it++){
+        auto ot = it->second.begin();
+        for( int c = 0; ot != it->second.end(), c < cantidad2; ot++,c++){
+            Y.push_back(ot->second);
+        }
+        cantidad2 ++;
+    }
+    
+    // cout << "X size: " << X.size() << endl;
+    // for(auto e: X){
+    //     cout << e << endl;
+    // }
+    // cout << endl;
+    // cout << "Y size: " << Y.size() << endl;
+    // for(auto e: Y){
+    //     cout << e << endl;
+    // }
+    // cout << endl;
+
+    auto r = coeficienteCorrelacion(X,Y);
+    cout << "ccc: " << r << endl;
+    answerLab.pb({r,"Estrategia Minima"});
 }
 
 void estrategia_distancia_maxima(){
     int nivelK = 1;
     distancia_maxima = matrix;
+
+    // conversion de la matrix de similaridad (F) a un vector X
+    auto distancia_maxima_ordenada = hashOrdered(distancia_maxima);
+    vector<double> X;
+    int cantidad = 0;
+    for(auto it = distancia_maxima_ordenada.begin(); it != distancia_maxima_ordenada.end(); it++){
+        auto ot = it->second.begin();
+        for(int c= 0; ot != it->second.end(),c < cantidad; ot++,c++){
+            X.push_back(ot->second);
+        }
+        cantidad++;
+    }
+
     cout << "Clusteres Iniciales: ";
     for(int e = 0 ; e < distancia_maxima.size(); e++){
         cout << e << " ";
     }cout << endl << endl;
     printMatrix(distancia_maxima);
+    unordered_map<string, unordered_map<string , double>> matrixCofenica;
+    matrixCofenica = distancia_maxima;
     while(distancia_maxima.size() >= 2){
         // cout << "distancia_minima size: " << distancia_minima.size() << endl;
         auto x_y_min = getMinAndClusters(distancia_maxima);
@@ -260,17 +374,56 @@ void estrategia_distancia_maxima(){
             cout << e << " ";
         }cout << endl;
         printMatrix(distancia_maxima);
+
+        // construccion de la matrix cofenica
+        for(auto it = x.begin(); it != x.end(); it++){
+            for(auto ot = y.begin(); ot != y.end(); ot++){
+                matrixCofenica[to_string(*it-'0')][to_string(*ot-'0')] = min;
+                matrixCofenica[to_string(*ot-'0')][to_string(*it-'0')] = min;
+            }
+        }
     }
+    cout << "print matrix cofenica - Estrategia distancia maxima" << endl;
+    printMatrix(matrixCofenica);
+    // conversion de la matriz a un vector Y
+    vector<double> Y;
+    int cantidad2 = 0;
+    auto matrixCofenicaOrdenada = hashOrdered(matrixCofenica);
+    for(auto it = matrixCofenicaOrdenada.begin() ; it != matrixCofenicaOrdenada.end(); it++){
+        auto ot = it->second.begin();
+        for( int c = 0; ot != it->second.end(), c < cantidad2; ot++,c++){
+            Y.push_back(ot->second);
+        }
+        cantidad2 ++;
+    }
+    auto r = coeficienteCorrelacion(X,Y);
+    cout << "ccc: " << r << endl;
+    answerLab.pb({r,"Estrategia Maxima"});
 }
 
 void estrategia_distancia_ponderada(){
     int nivelK = 1;
     distancia_ponderada = matrix;
+
+     // conversion de la matrix de similaridad (F) a un vector X
+    auto distancia_maxima_ponderada = hashOrdered(distancia_ponderada);
+    vector<double> X;
+    int cantidad = 0;
+    for(auto it = distancia_maxima_ponderada.begin(); it != distancia_maxima_ponderada.end(); it++){
+        auto ot = it->second.begin();
+        for(int c= 0; ot != it->second.end(),c < cantidad; ot++,c++){
+            X.push_back(ot->second);
+        }
+        cantidad++;
+    }
+
     cout << "Clusteres Iniciales: ";
     for(int e = 0 ; e < distancia_ponderada.size(); e++){
         cout << e << " ";
     }cout << endl << endl;
     printMatrix(distancia_ponderada);
+    unordered_map<string, unordered_map<string , double>> matrixCofenica;
+    matrixCofenica = distancia_ponderada;
     while(distancia_ponderada.size() >= 2){
         // cout << "distancia_minima size: " << distancia_minima.size() << endl;
         auto x_y_min = getMinAndClusters(distancia_ponderada);
@@ -314,50 +467,54 @@ void estrategia_distancia_ponderada(){
             cout << e << " ";
         }cout << endl;
         printMatrix(distancia_ponderada);
-    }
-}
 
-
-double media(vector<double> &X){
-    double sum=0;
-    for(auto x:X){
-        sum+=x;
+        // construccion de la matrix cofenica
+        for(auto it = x.begin(); it != x.end(); it++){
+            for(auto ot = y.begin(); ot != y.end(); ot++){
+                matrixCofenica[to_string(*it-'0')][to_string(*ot-'0')] = min;
+                matrixCofenica[to_string(*ot-'0')][to_string(*it-'0')] = min;
+            }
+        }
     }
-    return sum/X.size();
-}
-
-double coeficienteCorrelacion(vector<double> &X, vector<double> &Y){
-    // cout << X.size() << " " <<Y.size() << endl;
-    double mediaX = media(X);
-    double mediaY = media(Y);
-    double numerador = 0.0;
-    double firstDen = 0.0, secondDen = 0.0;
-    for(int e = 0 ; e < (int)X.size(); e++){
-        numerador += ( (X[e] - mediaX) * (Y[e] - mediaY) );
-        firstDen += ( (X[e] - mediaX) * (X[e] - mediaX) );
-        secondDen += ( (Y[e] - mediaY) * (Y[e] - mediaY) );
+    cout << "print matrix cofenica - Estrategia distancia ponderada" << endl;
+    printMatrix(matrixCofenica);
+    // conversion de la matriz a un vector Y
+    vector<double> Y;
+    int cantidad2 = 0;
+    auto matrixCofenicaOrdenada = hashOrdered(matrixCofenica);
+    for(auto it = matrixCofenicaOrdenada.begin() ; it != matrixCofenicaOrdenada.end(); it++){
+        auto ot = it->second.begin();
+        for( int c = 0; ot != it->second.end(), c < cantidad2; ot++,c++){
+            Y.push_back(ot->second);
+        }
+        cantidad2 ++;
     }
-    if(firstDen*secondDen == 0){
-        cout << "denominador 0\n";
-        return 0;
-    }
-    double r = numerador / sqrt(firstDen*secondDen);
-    return r;
+    auto r = coeficienteCorrelacion(X,Y);
+    cout << "ccc: " << r << endl;
+    answerLab.pb({r,"Estrategia Ponderada"});
 }
 
 
 void solve(){
     loadMatrix();
     printMatrix(matrix);
-    cout << "ESTRATEGIA DE DISTANCIA MINIMA" << endl;
+    cout << endl<< endl<< "ESTRATEGIA DE DISTANCIA MINIMA" << endl;
     estrategia_distancia_minima();
 
-    // cout << "ESTRATEGIA DE DISTANCIA MAXIMA" << endl;
-    // estrategia_distancia_maxima();
+    cout << endl << endl <<"ESTRATEGIA DE DISTANCIA MAXIMA" << endl;
+    estrategia_distancia_maxima();
 
-    // cout << "ESTRATEGIA DE DISTANCIA PONDERADA" << endl;
-    // estrategia_distancia_ponderada();
+    cout << endl << endl <<"ESTRATEGIA DE DISTANCIA PONDERADA" << endl;
+    estrategia_distancia_ponderada();
 
+    // Ver cual estrategia es la mejor
+    cout << endl << endl<<  "Indicando cual es la estrategia mejor" << endl;
+    sort(answerLab.begin(), answerLab.end());
+    for(auto e: answerLab   ){
+        cout << e.second << ": " << e.first << endl;
+    }
+
+    cout << endl << "Estrategia mejor: " << answerLab[2].second << " con un ccc: " << answerLab[2].first <<  endl;
 }
 
 
