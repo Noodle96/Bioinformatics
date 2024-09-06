@@ -13,183 +13,60 @@ Matrix
 -18 -15 -12 -9 -8 -7 -8 -6 -3 0 
 -20 -17 -14 -11 -10 -9 -8 -8 -5 -2 
 
-print direcciones 
-0 0 0 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-
-0 1 0 
-1 0 0 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-1 0 1 
-0 0 1 
-0 0 1 
-
-0 1 0 
-0 1 0 
-1 0 0 
-1 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-1 0 1 
-1 0 1 
-
-0 1 0 
-0 1 0 
-0 1 0 
-1 0 0 
-1 0 1 
-1 0 0 
-1 0 1 
-0 0 1 
-0 0 1 
-0 0 1 
-
-0 1 0 
-0 1 0 
-0 1 0 
-1 1 0 
-1 0 0 
-1 0 0 
-1 0 0 
-0 0 1 
-0 0 1 
-0 0 1 
-
-0 1 0 
-1 1 0 
-0 1 0 
-1 1 0 
-1 1 0 
-1 0 0 
-1 0 0 
-1 0 0 
-0 0 1 
-0 0 1 
-
-0 1 0 
-1 1 0 
-0 1 0 
-1 1 0 
-1 1 0 
-1 1 0 
-1 0 0 
-1 0 0 
-1 0 0 
-1 0 1 
-
-0 1 0 
-0 1 0 
-1 1 0 
-1 0 0 
-1 1 0 
-1 1 0 
-1 1 0 
-0 1 0 
-1 0 0 
-1 0 0 
-
-0 1 0 
-0 1 0 
-1 1 0 
-1 1 0 
-1 0 0 
-1 1 0 
-1 1 0 
-0 1 0 
-1 1 0 
-1 0 0 
-
-0 1 0 
-0 1 0 
-1 1 0 
-1 1 0 
-1 1 0 
-1 0 0 
-1 1 0 
-0 1 0 
-1 1 0 
-1 1 0 
-
-0 1 0 
-0 1 0 
-1 1 0 
-1 1 0 
-1 1 0 
-1 1 0 
-1 0 0 
-0 1 0 
-1 1 0 
-1 1 0 
-
 Alineamientos Generados
-Printing Cadena
-A A T C C A A T
-+
- T T T 
-A - T G C C A - - T T 
-Printing Cadena
-A T T C C A A T T T T 
-A T - G C C A - - T T 
-Printing Cadena
-A T C C C A A T T T T 
-A T T - C C A - - T T 
-Printing Cadena
-A A T C C A A T T T T 
-A - T G C C A - T - T 
-Printing Cadena
-A T T C C A A T T T T 
-A T - G C C A - T - T 
-Printing Cadena
-A T C C C A A T T T T 
-A T T - C C A - T - T 
-Printing Cadena
-A A T C C A A T T T T 
-A - T G C C A T - - T 
-Printing Cadena
-A T T C C A A T T T T 
-A T - G C C A T - - T 
-Printing Cadena
-A T C C C A A T T T T 
-A T T - C C A T - - T 
-Printing Cadena
-A A T C C A A T T T T 
-A - T G C C A - T T - 
-Printing Cadena
-A T T C C A A T T T T 
-A T - G C C A - T T - 
-Printing Cadena
-A T C C C A A T T T T 
-A T T - C C A - T T - 
-Printing Cadena
-A A T C C A A T T T T 
-A - T G C C A T - T - 
-Printing Cadena
-A T T C C A A T T T T 
-A T - G C C A T - T - 
-Printing Cadena
-A T C C C A A T T T T 
-A T T - C C A T - T - 
-Printing Cadena
-A A T C C A A T T T T 
-A - T G C C A T T - - 
-Printing Cadena
-A T T C C A A T T T T 
-A T - G C C A T T - - 
-Printing Cadena
-A T C C C A A T T T T 
-A T T - C C A T T - - 
 Cantidad de alineaminentos producidos: 18
+alineacionesTotales
+A-TCCAATTTT
+ATTGCCA--TT
+
+AT-CCAATTTT
+ATTGCCA--TT
+
+ATC-CAATTTT
+ATTGCCA--TT
+
+A-TCCAATTTT
+ATTGCCA-T-T
+
+AT-CCAATTTT
+ATTGCCA-T-T
+
+ATC-CAATTTT
+ATTGCCA-T-T
+
+A-TCCAATTTT
+ATTGCCAT--T
+
+AT-CCAATTTT
+ATTGCCAT--T
+
+ATC-CAATTTT
+ATTGCCAT--T
+
+A-TCCAATTTT
+ATTGCCA-TT-
+
+AT-CCAATTTT
+ATTGCCA-TT-
+
+ATC-CAATTTT
+ATTGCCA-TT-
+
+A-TCCAATTTT
+ATTGCCAT-T-
+
+AT-CCAATTTT
+ATTGCCAT-T-
+
+ATC-CAATTTT
+ATTGCCAT-T-
+
+A-TCCAATTTT
+ATTGCCATT--
+
+AT-CCAATTTT
+ATTGCCATT--
+
+ATC-CAATTTT
+ATTGCCATT--
+

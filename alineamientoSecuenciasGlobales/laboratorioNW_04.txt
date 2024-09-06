@@ -1,6 +1,6 @@
-Tiempo Inicio: 0.001542 segundos
-Tiempo Final: 0.00164 segundos
-Tiempo de ejecucion: 0.000103
+Tiempo Inicio: 0.001432 segundos
+Tiempo Final: 0.001466 segundos
+Tiempo de ejecucion: 3.8e-05
 score Optimo: -2
 
 Matrix

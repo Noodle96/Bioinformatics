@@ -28,6 +28,7 @@ matrix_double matrix,distancia_minima,distancia_maxima,distancia_ponderada;
 double val;
 int n,n_;
 int value = 1;
+int n_minimo;
 
 vector<pair<double, string>> answerLab;
 
@@ -138,9 +139,6 @@ void loadMatrix(){
         }
         value++;
     }
-    // cout << "print inicial" << endl;
-    // printMatrix(matrix);
-
     value = 1;
     for(int e = 0 ; e < n; e++){
         for(int j = 0 ;j < value ; j++){
@@ -148,9 +146,6 @@ void loadMatrix(){
         }
         value++;
     }
-
-    // cout << endl << "print final" << endl;
-    // printMatrix(matrix);
 }
 
 vector<string> getEtiquetaWithHash(matrix_double & M){
@@ -205,8 +200,9 @@ void estrategia_distancia_minima(){
     int nivelK = 1;
 
     distancia_minima = matrix;
+
     // conversion de la matrix de similaridad (F) a un vector X
-    auto distancia_minina_ordenada = hashOrdered(distancia_minima);
+    auto distancia_minina_ordenada = hashOrdered(distancia_minima); 
     vector<double> X;
     int cantidad = 0;
     for(auto it = distancia_minina_ordenada.begin(); it != distancia_minina_ordenada.end(); it++){

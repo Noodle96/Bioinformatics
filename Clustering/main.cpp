@@ -24,14 +24,7 @@ double getCurrentTime() {
 }
 matrix_double matrix,distancia_minima,distancia_maxima,distancia_ponderada;
 int n;
-void loadMatrix(){
-    cin>>n;
-    for(int e = 0 ; e < n; e++){
-        for(int j = 0 ;j < n ; j++){
-            cin>>matrix[to_string(e)][to_string(j)];
-        }
-    }
-}
+int value = 1;
 
 vector<string> getEtiqueta(vector<pair<string, vector<pair<string,double>>>> & M){
     vector<string> etiqueta;
@@ -40,29 +33,6 @@ vector<string> getEtiqueta(vector<pair<string, vector<pair<string,double>>>> & M
     }
     return etiqueta;
 }
-
-
-vector<string> getEtiquetaWithHash(matrix_double & M){
-    vector<pair<string, vector<pair<string,double>>>> print_m;
-    for(auto it = M.begin() ; it != M.end(); it++){
-        vector<pair<string,double>> temp;
-        for(auto ot = it->second.begin() ; ot != it->second.end()  ; ot++){
-            // cout << ot->second << " ";
-            temp.push_back({ot->first,ot->second});
-        }
-        // cout << endl;
-        print_m.push_back({it->first,temp});
-    }
-    // cout << endl;
-    sort(all(print_m));
-    for(auto it = print_m.begin() ; it != print_m.end(); it++){
-        sort(all(it->second));
-    }
-    vector<string> etiqueta;
-    etiqueta = getEtiqueta(print_m);
-    return etiqueta;
-}
-
 
 
 void printMatrix(matrix_double & M){
@@ -108,6 +78,48 @@ void printMatrix(matrix_double & M){
     // cout << endl;
 }
 
+void loadMatrix(){
+    cin>>n;
+    for(int e = 0 ; e < n; e++){
+        for(int j = 0 ;j < value ; j++){
+            cin>>matrix[to_string(e)][to_string(j)];
+        }
+        value++;
+    }
+    // cout << "print m mmmm" << endl;
+    // printMatrix(matrix);
+
+    value = 1;
+    for(int e = 0 ; e < n; e++){
+        for(int j = 0 ;j < value ; j++){
+            matrix[to_string(j)][to_string(e)] = matrix[to_string(e)][to_string(j)];
+        }
+        value++;
+    }
+}
+
+vector<string> getEtiquetaWithHash(matrix_double & M){
+    vector<pair<string, vector<pair<string,double>>>> print_m;
+    for(auto it = M.begin() ; it != M.end(); it++){
+        vector<pair<string,double>> temp;
+        for(auto ot = it->second.begin() ; ot != it->second.end()  ; ot++){
+            // cout << ot->second << " ";
+            temp.push_back({ot->first,ot->second});
+        }
+        // cout << endl;
+        print_m.push_back({it->first,temp});
+    }
+    // cout << endl;
+    sort(all(print_m));
+    for(auto it = print_m.begin() ; it != print_m.end(); it++){
+        sort(all(it->second));
+    }
+    vector<string> etiqueta;
+    etiqueta = getEtiqueta(print_m);
+    return etiqueta;
+}
+
+
 pair<string, pair<string,double>> getMinAndClusters(matrix_double &M){
     string x,y; double min = DBL_MAX;
     for(auto it = M.begin() ; it != M.end(); it++){
@@ -121,17 +133,24 @@ pair<string, pair<string,double>> getMinAndClusters(matrix_double &M){
                     y = ot->first;
                 }
             }
-            
+
         }
-        // cout << endl; 
+        // cout << endl;
     }
     // cout << endl;
     return {x,{y,min}};
 }
-
+int ToInt(string str){
+    stringstream ss(str);
+    int x = 0;
+    ss >> x;
+    return x;
+}
 void estrategia_distancia_minima(){
     int nivelK = 1;
+
     distancia_minima = matrix;
+    
     cout << "Clusteres Iniciales: ";
     for(int e = 0 ; e < distancia_minima.size(); e++){
         cout << e << " ";
@@ -148,7 +167,7 @@ void estrategia_distancia_minima(){
         string new_cluster;
         if(x<y) new_cluster = x + y;
         else new_cluster = y + x;
-        // cout << "new cluster: " << new_cluster << endl; 
+        // cout << "new cluster: " << new_cluster << endl;
 
         // UPDATE ROW
         for(auto it = distancia_minima.begin() ; it != distancia_minima.end(); it++){
@@ -162,7 +181,7 @@ void estrategia_distancia_minima(){
         //DELETE ROW
         distancia_minima.erase(x);
         distancia_minima.erase(y);
-        
+
         // DELETE COLUMN
         for (auto& rowPair : distancia_minima) {
             auto& rowMap = rowPair.second;
@@ -170,7 +189,7 @@ void estrategia_distancia_minima(){
             rowMap.erase(x);
         }
         for(auto it = distancia_minima.begin() ; it != distancia_minima.end(); it++){
-            distancia_minima[it->first][new_cluster] = distancia_minima[new_cluster][it->first]; 
+            distancia_minima[it->first][new_cluster] = distancia_minima[new_cluster][it->first];
         }
         cout << "Nivel K = " << nivelK++ << endl;
         cout << "Clusteres más proximos " << x << " y " << y << " (" << min << ")" << endl;
@@ -202,7 +221,7 @@ void estrategia_distancia_maxima(){
         string new_cluster;
         if(x<y) new_cluster = x + y;
         else new_cluster = y + x;
-        // cout << "new cluster: " << new_cluster << endl; 
+        // cout << "new cluster: " << new_cluster << endl;
 
         // UPDATE ROW
         for(auto it = distancia_maxima.begin() ; it != distancia_maxima.end(); it++){
@@ -216,7 +235,7 @@ void estrategia_distancia_maxima(){
         //DELETE ROW
         distancia_maxima.erase(x);
         distancia_maxima.erase(y);
-        
+
         // DELETE COLUMN
         for (auto& rowPair : distancia_maxima) {
             auto& rowMap = rowPair.second;
@@ -224,7 +243,7 @@ void estrategia_distancia_maxima(){
             rowMap.erase(x);
         }
         for(auto it = distancia_maxima.begin() ; it != distancia_maxima.end(); it++){
-            distancia_maxima[it->first][new_cluster] = distancia_maxima[new_cluster][it->first]; 
+            distancia_maxima[it->first][new_cluster] = distancia_maxima[new_cluster][it->first];
         }
         cout << "Nivel K = " << nivelK++ << endl;
         cout << "Clusteres más proximos " << x << " y " << y << " (" << min << ")" << endl;
@@ -255,7 +274,7 @@ void estrategia_distancia_ponderada(){
         string new_cluster;
         if(x<y) new_cluster = x + y;
         else new_cluster = y + x;
-        // cout << "new cluster: " << new_cluster << endl; 
+        // cout << "new cluster: " << new_cluster << endl;
 
         // UPDATE ROW
         for(auto it = distancia_ponderada.begin() ; it != distancia_ponderada.end(); it++){
@@ -269,7 +288,7 @@ void estrategia_distancia_ponderada(){
         //DELETE ROW
         distancia_ponderada.erase(x);
         distancia_ponderada.erase(y);
-        
+
         // DELETE COLUMN
         for (auto& rowPair : distancia_ponderada) {
             auto& rowMap = rowPair.second;
@@ -277,7 +296,7 @@ void estrategia_distancia_ponderada(){
             rowMap.erase(x);
         }
         for(auto it = distancia_ponderada.begin() ; it != distancia_ponderada.end(); it++){
-            distancia_ponderada[it->first][new_cluster] = distancia_ponderada[new_cluster][it->first]; 
+            distancia_ponderada[it->first][new_cluster] = distancia_ponderada[new_cluster][it->first];
         }
         cout << "Nivel K = " << nivelK++ << endl;
         cout << "Clusteres más proximos " << x << " y " << y << " (" << min << ")" << endl;
@@ -316,6 +335,10 @@ void test(){
     double c = min(a,b);
     cout << c << endl;
 }
+void test2(){
+    loadMatrix();
+    printMatrix(matrix);
+}
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0);
@@ -325,5 +348,6 @@ int main(){
     #endif
     solve();
     // test();
+    // test2();
     return 0;
 }
